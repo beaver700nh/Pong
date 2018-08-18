@@ -32,13 +32,13 @@ class Pong:
         self.tk.destroy()
         
 
-class Ball:
+class Ball(Pong):
     def __init__(self, canvas, color):
         self.canvas = canvas
         self.id = canvas.create_oval(10, 10, 25, 25, fill=color)
         self.canvas.move(self.id, 270, 270)
 
-        from_starts = [-10, -5, -3, -2, -1, 1, 2, 3, 5, 10]
+        from_starts = [-30, -10, -5, -3, -2, -1, 1, 2, 3, 5, 10, 30]
         chosen = pick_a.choice(from_starts)
         self.x = chosen
         self.y = -3
@@ -58,10 +58,11 @@ class Ball:
             self.y = 1
         if ball_pos[2] >= self.window_width:
             self.x = -3
-        if ball_pos[3] >= self.window_height:
+        if ball_pos[3] >= self.window_height or \
+           ball_pos[1] <= 0:
             self.hit_bottom = True
 
-class Paddle:
+class Paddle(Pong):
     def __init__(self, canvas, color, ball, x_pos, y_pos, control_left, control_right):
         self.left_ctrl = control_left
         self.right_ctrl = control_right
@@ -125,8 +126,8 @@ try:
         game.redraw()
         animation.sleep(0.01)
 
+    print('Game Over')
+    game.kill(seconds=1.5)
+        
 except TclError:
     pass
-
-print('Game Over')
-game.kill(seconds=1.5)
