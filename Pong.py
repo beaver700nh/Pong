@@ -4,7 +4,7 @@ import random as pick_a
 import sys as system
 
 print('"Pong" by Minh Le')
-print('Running using python\n' + system.version)
+print('Running using Python\n' + system.version)
 print('-------------------------------------------------------')
 
 class Pong:
